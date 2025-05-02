@@ -11,6 +11,10 @@ class HomeController extends Controller
         return Inertia::render('Index');
     }
 
+    public function likes(): Response
+    {
+        return Inertia::render('Likes');
+    }
     public function downloadVideos(): Response
     {
         $videos = session('videos', []);

@@ -2,6 +2,7 @@ import { useForm, Head } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EasyLayout from '@/layouts/EasyLayout';
 const Index = ({ }) => {
     const [mode, setMode] = useState<'url' | 'username'>('url');
 
@@ -65,7 +66,9 @@ const Index = ({ }) => {
 
 
     return (
-        <div className="bg-black sm:h-screen h-svh w-screen flex justify-center items-center">
+      <>
+        <EasyLayout/>
+        <div className="bg-black sm:h-screen h-svh w-screen flex justify-center items-center ">
             <div className="w-11/12 sm:w-4/12 p-6 bg-white shadow-lg rounded-lg">
                 <ToastContainer />
 
@@ -127,6 +130,7 @@ const Index = ({ }) => {
                 </form>
             </div>
         </div>
+      </>
     );
 }
 
