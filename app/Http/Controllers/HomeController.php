@@ -31,6 +31,11 @@ class HomeController extends Controller
             'video' => $data,
         ]);
     }
+
+    public function insta(): Response
+    {
+        return Inertia::render('Insta');
+    }
 }
 
 

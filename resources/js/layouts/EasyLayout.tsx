@@ -15,17 +15,27 @@ const EasyLayout = () => {
     const links: Link[] = [
         {
             id: 1,
-            title: 'Video',
+            title: 'Tiktok',
             route: 'index',
             active: true,
 
-        }, {
-            id: 2,
-            title: 'Likes',
-            route: 'likes',
+        },
+
+        // {
+        //     id: 2,
+        //     title: 'Tiktok Likes',
+        //     route: 'likes',
+        //     active: false,
+
+        // },
+        {
+            id: 3,
+            title: 'Instagram',
+            route: 'insta',
             active: false,
 
         }
+
 
     ]
 
@@ -37,7 +47,7 @@ const EasyLayout = () => {
                     <li key={link.id} >
                         <Link
                             href={route(link.route)} as='button'
-                            className={`bg-green-600 shadow-inner shadow-black text-black cursor-pointer font-bold flex justify-between items-center w-full text-[10px] px-10 mt-4 py-2 rounded-sm hover:bg-yellow-500 transition ${page.component.toLowerCase().includes(link.route.toLowerCase()) ? 'bg-yellow-500 transition' :'bg-green-600' }`}
+                            className={` shadow-inner shadow-black text-black cursor-pointer font-bold flex justify-between items-center w-full text-[10px] px-10 mt-4 py-2 rounded-sm hover:bg-green-400 transition ${page.component.toLowerCase().includes(link.route.toLowerCase()) ? 'bg-green-500 transition! text-gray-100 font-extrabold! text-sm!' :'bg-white' }`}
  >
                             {link.title}
                         </Link>

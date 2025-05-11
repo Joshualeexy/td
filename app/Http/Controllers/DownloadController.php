@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 
 class DownloadController extends Controller
 {
-    public function fetchSingle(Request $request):RedirectResponse
+    public function fetchSingle(Request $request): RedirectResponse
     {
         session()->forget('video');
         $request->validate(['url' => 'required|url|min:12']);
@@ -29,7 +29,7 @@ class DownloadController extends Controller
         }
 
 
-        session()->put(   'video' , [
+        session()->put('video', [
             'url' => $data['hdplay'] ?? $data['play'],
             'thumbnail' => $data['cover'],
             'caption' => $data['title'],
@@ -40,7 +40,7 @@ class DownloadController extends Controller
 
         return redirect()->route('downloadvideo')->with([
             'video' => session('video') ?? null,
-    ]);
+        ]);
     }
 
     public function fetchUser(Request $request)
@@ -113,5 +113,27 @@ class DownloadController extends Controller
             ]));
     }
 
+    public function proxymedia(Request $request)
+    {
+        $url = $request->query('url');
+
+        if (!$url) {
+            abort(400, 'Missing URL.');
+        }
+
+        $response = Http::withHeaders([
+            'Referer' => 'https://www.instagram.com/',
+            'Origin' => 'https://www.instagram.com',
+        ])->get($url);
+
+        if (!$response->successful()) {
+            abort(404, 'Media not found.');
+        }
+
+        return response($response->body(), 200)
+            ->header('Content-Type', $response->header('Content-Type'))
+            ->header('Content-Disposition', 'inline; filename="media"');
+
+    }
 
 }
